@@ -8,30 +8,18 @@
 ### 1. Design
 The API must embrace RESTful design principles
 
-Introduction
-
-Enchant is a fully hosted solution to manage email and twitter based customer support. We provide a REST API built on pragmatic RESTful design principles.
-
-Our API uses resource-oriented URLs that leverage built in features of HTTP, like authentication, verbs and response codes. All request and response bodies are JSON encoded, including error responses. Any off-the-shelf HTTP client can be used to communicate with the API.
-
-We believe an API is a user interface for a developer - accordingly, we've made sure our API can be easily explored from the browser!
-
-Changes
-
-This is a versionless API. Advance notification of breaking changes will be available in this document and will be sent by email to our developer mailing list.
-
 ### 2. Security
 
 The API must be served over SSL.
 
 ### 3. Verbs
 
-|       Verb   |                     Description                       |      Fallback      |
-|--------------|------------------------------------------------------:|-------------------:|
-|  GET         | Used for retrieving resources.                        |                    |
-|  POST        | Used for creating resources.                          |                    |
-|  PATCH / PUT | Used for updating resources.                          |                    |
-|  DELETE      | Used for deleting resources.                          |                    |
+|       Verb   |                     Description                       |
+|--------------|-------------------------------------------------------|
+|  GET         | Used for retrieving resources.                        |
+|  POST        | Used for creating resources.                          |
+|  PATCH / PUT | Used for updating resources.                          |
+|  DELETE      | Used for deleting resources.                          |
 
 #### Fallback header
 
@@ -48,7 +36,7 @@ Codes in the 2xx range must indicate a success, codes in the 4xx range must indi
 The API must use the following status codes:
 
 |          Http Code        |                               Meaning                                     |
-|---------------------------|--------------------------------------------------------------------------:|
+|---------------------------|---------------------------------------------------------------------------|
 | 200 OK                    | Request succeeded. Response included                                      |
 | 201 Created               | Resource created. URL to new resource in Location header                  |
 | 204 No Content            | Request succeeded, but no response body                                   |
