@@ -41,6 +41,10 @@ The API must correctly handle this header. When it is set, it take precedence ov
 
 ### Status codes
 
+**The API must uses descriptive HTTP response codes to indicate the success or failure of request.**
+
+Codes in the 2xx range must indicate a success, codes in the 4xx range must indicate an error that failed given the information provided (e.g., a required parameter was omitted, a charge failed, etc.), and codes in the 5xx range must indicate a server-side error (e.g., the server is unavailable).
+
 The API must use the following status codes:
 
 |          Http Code        |                               Meaning                                     |
@@ -55,8 +59,9 @@ The API must use the following status codes:
 | 415 Unsupported Media Type| POST/PUT/PATCH request occurred without a application/json content type   |
 | 422 Unprocessable Entry   | A request to modify or create a resource failed due to a validation error |
 | 429 Too Many Requests     | Request rejected due to rate limiting                                     |
-| 500, 501, 502, 503, etc   | An internal server error occured                                          |
-
+| 500 Internal Server Error | An internal server error occured                                          |
+| 502 Bad Gateway           | The server was acting as a gateway or proxy and received an invalid response from the upstream server |
+| 503 Service Unavailable   | The server is currently unable to handle the request.                     |
 
 
 ### Errors
