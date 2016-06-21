@@ -66,6 +66,14 @@ The API must use the following status codes:
 
 ### Errors
 
+All errors in the 4xx must return a body containing a `error` key, containing the error code. This code must be identical over the same kinds of errors. The body should also contain a `message` key, containing a more detailled description of the error. 
+
+```json
+{
+   "error": "Not Found",
+   "message": "Unable to found user with id '4'"
+}
+```
 
 ### Parameters
 
