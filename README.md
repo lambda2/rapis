@@ -20,38 +20,43 @@ Changes
 
 This is a versionless API. Advance notification of breaking changes will be available in this document and will be sent by email to our developer mailing list.
 
-### Security
+### 2. Security
 
-### Verbs
+The API must be served over SSL.
 
-VERB 
-DESCRIPTION 
-GET 
-Used for retrieving resources. 
-POST 
-Used for creating resources. 
-PUT 
-Used for changing/replacing resources or collections. 
-DELETE 
-Used for deleting resources. 
+### 3. Verbs
+
+|       Verb   |                     Description                       |      Fallback      |
+|--------------|------------------------------------------------------:|-------------------:|
+|  GET         | Used for retrieving resources.                        |                    |
+|  POST        | Used for creating resources.                          |                    |
+|  PATCH / PUT | Used for updating resources.                          |                    |
+|  DELETE      | Used for deleting resources.                          |                    |
+
+#### Fallback header
+
+The HTTP client that doesn't support PUT, PATCH or DELETE requests must send a POST request with an `X-HTTP-Method-Override` header specifying the desired verb.
+
+The API must correctly handle this header. When it is set, it take precedence over the original request method.
 
 ### Status codes
 
+The API must use the following status codes:
 
-Errors
-----------------
+|          Http Code        |                               Meaning                                     |
+|---------------------------|--------------------------------------------------------------------------:|
+| 200 OK                    | Request succeeded. Response included                                      |
+| 201 Created               | Resource created. URL to new resource in Location header                  |
+| 204 No Content            | Request succeeded, but no response body                                   |
+| 400 Bad Request           | Could not parse request                                                   |
+| 401 Unauthorized          | No authentication credentials provided or authentication failed           |
+| 403 Forbidden             | Authenticated user does not have access                                   |
+| 404 Not Found             | Page or resource not found                                                |
+| 415 Unsupported Media Type| POST/PUT/PATCH request occurred without a application/json content type   |
+| 422 Unprocessable Entry   | A request to modify or create a resource failed due to a validation error |
+| 429 Too Many Requests     | Request rejected due to rate limiting                                     |
+| 500, 501, 502, 503, etc   | An internal server error occured                                          |
 
-The 42 API uses the following error codes:
-
-| Http Code | Error code | Meaning |
-|-----------|-----------:|--------:|
-| 400       |            | The request is malformed |
-| 401       |            | Unauthorized |
-| 403       |            | Forbidden|
-| 404       |            | Page or resource is not found|
-| 422       |            | Unprocessable entity|
-| 500       |            | We have a problem with our server. Please try again later.|
-| Connection refused       |            |Most likely cause is not using HTTPS. |
 
 
 ### Errors
