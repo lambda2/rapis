@@ -2,7 +2,7 @@
 
 ## REST API Standard
 
-> A specification proposal for Rest API's
+A 21th century specification proposal for Rest API's
 
 
 ### 1. Design
@@ -10,8 +10,16 @@
 The API must embrace RESTful design principles. It must be resource-based, and each resource representation must contain enough information to modify or delete the resource on the server, provided it has permission to do so.
 
 - The resources names and fields must be [snake_case](http://en.wikipedia.org/wiki/Snake_case).
+
+> [snake_case is 20% easier to read than camelCase](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=5521745). That impact on readability would affect API explorability and examples in documentation. 
+
 - The resources names must be nouns.
+
+> [Nouns are good, verbs are bad](http://apigee.com/about/blog/technology/restful-api-design-nouns-are-good-verbs-are-bad)
+
 - The endpoints names must be plural.
+
+> You don't want to deal with complex pluralization (e.g., foot/feet, child/children, people/people). Keep it simple.
 
 ### 2. Formatting
 
@@ -21,6 +29,8 @@ The API must embrace RESTful design principles. It must be resource-based, and e
 ### 3. Security
 
 The API must be served over SSL, using `https`. It must not redirect on non-SSL urls.
+
+> Always using SSL guaranteed encrypted communications, and allow use of simple access tokens.
 
 ### 4. Verbs
 
@@ -167,7 +177,7 @@ X-Version: 3.1
 
 ### Sources
 
-
+- [Nouns are good, verbs are bad](http://apigee.com/about/blog/technology/restful-api-design-nouns-are-good-verbs-are-bad)
 - [Principles of good RESTful API Design](https://codeplanet.io/principles-good-restful-api-design/)
 - [Best Practices for Designing a Pragmatic RESTful API](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#useful-post-responses)
 - [Semver](http://semver.org/)
