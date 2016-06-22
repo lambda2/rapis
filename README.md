@@ -67,7 +67,11 @@ The API must use the following status codes:
 
 ### Errors
 
-All errors in the 4xx must return a body containing a `error` key, containing the error code. This code must be identical over the same kinds of errors. The body should also contain a `message` key, containing a more detailled description of the error. 
+- All errors in the 4xx must return a body containing a `error` key, containing the error code.
+
+- This code must be human readable, and identical over the same kinds of errors.
+
+- The body should also contain a `message` key, containing a more detailled description of the error. 
 
 ```json
 {
@@ -76,12 +80,34 @@ All errors in the 4xx must return a body containing a `error` key, containing th
 }
 ```
 
-On validation errors (with a 422 Unprocessable Entity status code), the body should contain a `messages` array containing all the validation errors.
+- On validation errors (with a 422 Unprocessable Entity status code), the body should contain a `messages` array containing all the validation errors.
+
+```json
+{
+   "error": "Validation failed",
+   "messages": ["name cannot be blank"]
+}
+```
 
 
 ### Parameters
 
-Resource creation or update parameters must be wrapped in an object as the name of the resource.
+Resource creation or update parameters must be wrapped in an object as the singular name of the resource.
+
+```HTTP
+POST /unicorns HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Host: api.example.com
+
+{
+  "unicorn": {
+    "name": "John",
+    "color": "purple"
+  }
+}
+```
+
 
 ### Custom HTTP headers
 
@@ -97,6 +123,23 @@ The API must be versioned, and must not have breaking changes whitout version ch
 - Without `Accept` header, the API must use the last stable version.
 - The response header must contain a `X-Version` field containing the version used for this request.
 - The version field should be formated using the [semantic versioning](http://semver.org/).
+
+```HTTP
+GET / HTTP/1.1
+Accept: application/vnd.example-app.v3.1+json
+Content-Type: application/json
+Host: api.example.org
+
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 477
+Content-Type: application/json
+X-Version: 3.1
+
+{
+  [...]
+}
+```
 
 ### Pagination
 
