@@ -186,13 +186,115 @@ X-Version: 3.1
 
 ### Pagination
 
+Requests for collections should be paginated, and return a limited number of results.
+
+In this case, the client must be able to change the requested page using the `page[number]` parameter.
+
+The client should also be able to change the number of items returned per page using the `page[size]` parameter.
+
+> A lot of services uses the `page` and the `per_page` parameters to set the page number and the number of items per page. The server should be able to support both of theses parameters.
+
+A paginated response should have: 
+- A [`Link` header](https://tools.ietf.org/html/rfc5988), which should contain links to the next, previous, first and last resources.
+- A `X-Page` header, containing the current page.
+- A `X-Per-Page` header, containing the number of items per page.
+- A `X-Total` header, containing the total items count.
+
+
+```HTTP
+GET /unicorns?page[size]=2 HTTP/1.1
+Content-Type: application/json
+Host: api.example.org
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Link: <https://api.example.org/unicorns?page[number]=2&page[size]=2>; rel="last", <https://api.example.org/unicorns?page[number]=2&page[size]=2>; rel="next"
+X-Page: 1
+X-Per-Page: 2
+X-Total: 4
+
+[
+  {
+    "id": 1,
+    "name": "Charles",
+    "color": "yellow",
+    "created_at": "2016-07-25T12:19:33Z",
+    "country": {
+      "name": "Australia"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Zoe",
+    "color": "green",
+    "created_at": "2016-07-25T12:19:33Z",
+    "country": {
+      "name": "Italy"
+    }
+  }
+]
+```
 
 ### Filtering
 
 
 ### Sorting
 
-The client should be able to 
+The client should be able to sort resource collections according to one or more fields using the `sort` parameter. The value for `sort` must represent sort fields.
+
+Sorting on multiple fields should be done by allowing comma-separated sort fields. In this case, sort fields should be applied in the order specified.
+
+The sort order for each sort field must be ascending unless it is prefixed with a minus (`-`), in which case it must be descending.
+
+```HTTP
+GET /unicorns?sort=color,-name HTTP/1.1
+Content-Type: application/json
+Host: api.example.org
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "id": 2,
+    "name": "Zoe",
+    "color": "green",
+    "created_at": "2016-07-25T12:19:33Z",
+    "country": {
+      "name": "Italy"
+    }
+  },
+  {
+    "id": 4,
+    "name": "John",
+    "color": "purple",
+    "created_at": "2016-07-25T12:19:33Z",
+    "country": {
+      "name": "France"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Mike",
+    "color": "yellow",
+    "created_at": "2016-07-25T12:19:33Z",
+    "country": {
+      "name": "U.S.A"
+    }
+  },
+  {
+    "id": 1,
+    "name": "Charles",
+    "color": "yellow",
+    "created_at": "2016-07-25T12:19:33Z",
+    "country": {
+      "name": "Australia"
+    }
+  }
+]
+```
+
+If the server does not support sorting as specified in the query parameter `sort`, it must return a `400 Bad Request` status code.
 
 ### Searching
 
@@ -231,7 +333,7 @@ Content-Type: application/json
   },
   {
     "id": 3,
-    "color": "red",
+    "color": "yellow",
     "country": {
       "name": "U.S.A"
     }
@@ -246,8 +348,7 @@ Content-Type: application/json
 ]
 ```
 
-
-### Counting
+If the server does not support selection as specified in the query parameter `fields`, it must return a `400 Bad Request` status code.
 
 
 ### Enveloping
