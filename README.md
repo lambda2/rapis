@@ -83,16 +83,32 @@ The API must use the following status codes:
 
 - The body should also contain a `message` key, containing a more detailled description of the error. 
 
-```json
+```HTTP
+GET /unicorns/4 HTTP/1.1
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
 {
    "error": "Not Found",
-   "message": "Unable to found user with id '4'"
+   "message": "Unable to found unicorn with id '4'"
 }
 ```
 
 - On validation errors (with a 422 Unprocessable Entity status code), the body should contain a `messages` array containing all the validation errors.
 
-```json
+```HTTP
+POST /unicorns HTTP/1.1
+
+{
+  "unicorn": {
+    "color": "purple"
+  }
+}
+
+HTTP/1.1 422 Unprocessable Entity
+Content-Type: application/json
+
 {
    "error": "Validation failed",
    "messages": ["name cannot be blank"]
@@ -113,7 +129,24 @@ Host: api.example.com
 {
   "unicorn": {
     "name": "John",
-    "color": "purple"
+    "color": "purple",
+    "country_id": 1
+  }
+}
+
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "unicorn": {
+    "id": 4,
+    "name": "John",
+    "color": "purple",
+    "created_at": "2016-07-25T12:19:33Z",
+    "country": {
+      "id": 1,
+      "name": "France"
+    }
   }
 }
 ```
@@ -135,7 +168,7 @@ The API must be versioned, and must not have breaking changes whitout version ch
 - The version field should be formated using the [semantic versioning](http://semver.org/).
 
 ```HTTP
-GET / HTTP/1.1
+GET /unicorns HTTP/1.1
 Accept: application/vnd.example-app.v3.1+json
 Content-Type: application/json
 Host: api.example.org
@@ -159,11 +192,59 @@ X-Version: 3.1
 
 ### Sorting
 
+The client should be able to 
 
 ### Searching
 
 
 ### Embedding
+
+
+### Selecting
+
+The client should be able to select only specific fields in the response using the `fields` parameter. In this case, only the requested fields will be returned.
+
+The value of the `fields` parameter must be a hash of the resource name as a key, and a comma-separated list of the fields names to be returned as a value.
+
+```HTTP
+GET /unicorns?fields[unicorns]=id,color&fields[countries]=name HTTP/1.1
+Content-Type: application/json
+Host: api.example.org
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "color": "yellow",
+    "country": {
+      "name": "Australia"
+    }
+  },
+  {
+    "id": 2,
+    "color": "green",
+    "country": {
+      "name": "Italy"
+    }
+  },
+  {
+    "id": 3,
+    "color": "red",
+    "country": {
+      "name": "U.S.A"
+    }
+  },
+  {
+    "id": 4,
+    "color": "purple",
+    "country": {
+      "name": "France"
+    }
+  }
+]
+```
 
 
 ### Counting
@@ -181,3 +262,4 @@ X-Version: 3.1
 - [Principles of good RESTful API Design](https://codeplanet.io/principles-good-restful-api-design/)
 - [Best Practices for Designing a Pragmatic RESTful API](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#useful-post-responses)
 - [Semver](http://semver.org/)
+- [JSON API specification](http://jsonapi.org/)
