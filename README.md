@@ -5,6 +5,10 @@
 A 21th century specification proposal for Rest API's
 
 
+---------------
+
+#### This specification is intended to establish an agreement on the behavior of an API, no matters the format (json, xml, etc...).
+
 ### 1. Design
 
 The API must embrace RESTful design principles. It must be resource-based, and each resource representation must contain enough information to modify or delete the resource on the server, provided it has permission to do so.
@@ -51,6 +55,14 @@ The HTTP client that doesn't support PUT, PATCH or DELETE requests must send a P
 
 The server must correctly handle this header. When it is set, it take precedence over the original request method.
 
+#### Location header
+
+When a resource is created (with a `POST` request), the response must contain a `Location` header with the link of the new resource.
+
+#### Resource on update and create actions
+
+When a resource is created or modified (e.g., with a POST, PUT or PATCH request), the response must contain the created or updated respresentation of the resource.
+
 ### Status codes
 
 **The API must uses descriptive HTTP response codes to indicate the success or failure of request.**
@@ -64,6 +76,7 @@ The server must respond with the following status codes, according to the situat
 | 200 OK                    | Request succeeded. Response included                                      |
 | 201 Created               | Resource created. URL to new resource in Location header                  |
 | 204 No Content            | Request succeeded, but no response body                                   |
+| 303 See other             | The resource is in another location. See [Asynchronous processing](#asynchronous_processing). |
 | 304 Not Modified          | The response is not modified since the last call. Returned by the cache.  |
 | 400 Bad Request           | Could not parse request                                                   |
 | 401 Unauthorized          | No authentication credentials provided or authentication failed           |
@@ -146,11 +159,7 @@ Content-Type: application/json
     "id": 4,
     "name": "John",
     "color": "purple",
-    "created_at": "2016-07-25T12:19:33Z",
-    "country": {
-      "id": 1,
-      "name": "France"
-    }
+    "created_at": "2016-07-25T12:19:33Z"
   }
 }
 ```
@@ -222,19 +231,13 @@ X-Total: 4
     "id": 1,
     "name": "Charles",
     "color": "yellow",
-    "created_at": "2016-07-25T12:19:33Z",
-    "country": {
-      "name": "Australia"
-    }
+    "created_at": "2016-07-25T12:19:33Z"
   },
   {
     "id": 2,
     "name": "Zoe",
     "color": "green",
-    "created_at": "2016-07-25T12:19:33Z",
-    "country": {
-      "name": "Italy"
-    }
+    "created_at": "2016-07-25T12:19:33Z"
   }
 ]
 ```
@@ -256,17 +259,11 @@ Content-Type: application/json
 [
   {
     "id": 1,
-    "color": "yellow",
-    "country": {
-      "name": "Australia"
-    }
+    "color": "yellow"
   },
   {
     "id": 3,
-    "color": "yellow",
-    "country": {
-      "name": "U.S.A"
-    }
+    "color": "yellow"
   }
 ]
 ```
@@ -293,18 +290,97 @@ Content-Type: application/json
     "id": 2,
     "name": "Zoe",
     "color": "green",
-    "created_at": "2016-07-25T12:19:33Z",
-    "country": {
-      "name": "Italy"
-    }
+    "created_at": "2016-07-25T12:19:33Z"
   },
   {
     "id": 4,
     "name": "John",
     "color": "purple",
+    "created_at": "2016-07-25T12:19:33Z"
+  },
+  {
+    "id": 3,
+    "name": "Mike",
+    "color": "yellow",
+    "created_at": "2016-07-25T12:19:33Z"
+  },
+  {
+    "id": 1,
+    "name": "Charles",
+    "color": "yellow",
+    "created_at": "2016-07-25T12:19:33Z"
+  }
+]
+```
+
+If the server does not support sorting as specified in the query parameter `sort`, it must return a `400 Bad Request` status code.
+
+### Searching
+
+The client should be able to search on resource collections using the `search` parameter. In this case, only the fields matching the given search(s) will be returned.
+
+The value of the `search` parameter must be a hash of the search field as a key, and the query as a value.
+
+```HTTP
+GET /unicorns?search[name]=e HTTP/1.1
+Content-Type: application/json
+Host: api.example.org
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "name": "Charles",
+    "color": "yellow",
+    "created_at": "2016-07-25T12:19:33Z"
+  },
+  {
+    "id": 2,
+    "name": "Zoe",
+    "color": "green",
+    "created_at": "2016-07-25T12:19:33Z"
+  },
+  {
+    "id": 3,
+    "name": "Mike",
+    "color": "yellow",
+    "created_at": "2016-07-25T12:19:33Z"
+  }
+]
+```
+
+
+### Embedding
+
+The client should be able to include data related to (or referenced) from the resource being requested using the `embed` parameter. The value of the `embed` parameter must be a comma separated list of fields to be embedded. Dot-notation must be used to refer to sub-fields.
+
+```HTTP
+GET /unicorns?embed=country.name HTTP/1.1
+Content-Type: application/json
+Host: api.example.org
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "name": "Charles",
+    "color": "yellow",
     "created_at": "2016-07-25T12:19:33Z",
     "country": {
-      "name": "France"
+      "name": "Australia"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Zoe",
+    "color": "green",
+    "created_at": "2016-07-25T12:19:33Z",
+    "country": {
+      "name": "Italy"
     }
   },
   {
@@ -317,24 +393,16 @@ Content-Type: application/json
     }
   },
   {
-    "id": 1,
-    "name": "Charles",
-    "color": "yellow",
+    "id": 4,
+    "name": "John",
+    "color": "purple",
     "created_at": "2016-07-25T12:19:33Z",
     "country": {
-      "name": "Australia"
+      "name": "France"
     }
   }
 ]
 ```
-
-If the server does not support sorting as specified in the query parameter `sort`, it must return a `400 Bad Request` status code.
-
-### Searching
-
-
-### Embedding
-
 
 ### Selecting
 
@@ -343,7 +411,7 @@ The client should be able to select only specific fields in the response using t
 The value of the `fields` parameter must be a hash of the resource name as a key, and a comma-separated list of the fields names to be returned as a value.
 
 ```HTTP
-GET /unicorns?fields[unicorns]=id,color&fields[countries]=name HTTP/1.1
+GET /unicorns?fields[unicorns]=id,color HTTP/1.1
 Content-Type: application/json
 Host: api.example.org
 
@@ -353,41 +421,24 @@ Content-Type: application/json
 [
   {
     "id": 1,
-    "color": "yellow",
-    "country": {
-      "name": "Australia"
-    }
+    "color": "yellow"
   },
   {
     "id": 2,
-    "color": "green",
-    "country": {
-      "name": "Italy"
-    }
+    "color": "green"
   },
   {
     "id": 3,
-    "color": "yellow",
-    "country": {
-      "name": "U.S.A"
-    }
+    "color": "yellow"
   },
   {
     "id": 4,
-    "color": "purple",
-    "country": {
-      "name": "France"
-    }
+    "color": "purple"
   }
 ]
 ```
 
 If the server does not support selection as specified in the query parameter `fields`, it must return a `400 Bad Request` status code.
-
-
-### Enveloping
-
-> TODO
 
 ### Caching
 
@@ -395,7 +446,7 @@ If the server does not support selection as specified in the query parameter `fi
 
 ### Asynchronous processing
 
-> TODO
+When a resource creation or update is asynchronously processed, the request should return a `202 Accepted` status code with a link in the `Content-Location` header.
 
 ### Sources
 
