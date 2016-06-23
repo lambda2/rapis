@@ -76,7 +76,7 @@ The server must respond with the following status codes, according to the situat
 | 200 OK                    | Request succeeded. Response included                                      |
 | 201 Created               | Resource created. URL to new resource in Location header                  |
 | 204 No Content            | Request succeeded, but no response body                                   |
-| 303 See other             | The resource is in another location. See [Asynchronous processing](#asynchronous_processing). |
+| 303 See other             | The resource is in another location. See [Asynchronous processing](#asynchronous-processing). |
 | 304 Not Modified          | The response is not modified since the last call. Returned by the cache.  |
 | 400 Bad Request           | Could not parse request                                                   |
 | 401 Unauthorized          | No authentication credentials provided or authentication failed           |
@@ -440,13 +440,46 @@ Content-Type: application/json
 
 If the server does not support selection as specified in the query parameter `fields`, it must return a `400 Bad Request` status code.
 
+
 ### Caching
 
-> TODO
+Server should generate a [ETag header](http://en.wikipedia.org/wiki/HTTP_ETag) containing a hash or checksum of the representation. This value should change whenever the output representation changes.
 
 ### Asynchronous processing
 
-When a resource creation or update is asynchronously processed, the request should return a `202 Accepted` status code with a link in the `Content-Location` header.
+When a resource creation or update is asynchronously processed, the request should return a `202 Accepted` status code with a link in the `Content-Location` header which should redirect to the resource when the job processing is done.
+
+
+```HTTP
+POST /movies HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Host: api.example.com
+
+{
+  "movie": {
+    "name": "Charlie the Unicorn",
+    "source": "https://www.youtube.com/watch?v=CsGYh8AacgY"
+  }
+}
+
+HTTP/1.1 202 Accepted
+Content-Type: application/json
+Content-Location: https://api.example.com/movies/jobs/42
+
+{}
+```
+
+When the job process is done, the request of the url in the `Content-Location` header should return a `303 See other` status code with the created resource link in `Location` header.
+
+```HTTP
+GET /movies/jobs/42 HTTP/1.1
+Accept: application/json
+
+HTTP/1.1 303 See other
+Content-Type: application/json
+Location: https://api.example.com/movies/3
+```
 
 ### Sources
 
