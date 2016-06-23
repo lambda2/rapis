@@ -26,11 +26,15 @@ The API must embrace RESTful design principles. It must be resource-based, and e
 - Dates must be returned in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ).
 - Geographic coordinates must be returned in `[-]d.d, [-]d.d` format (e.g., 12.3456, -98.7654).
 
+> TODO: more ?
+
 ### 3. Security
 
 The API must be served over SSL, using `https`. It must not redirect on non-SSL urls.
 
 > Always using SSL guaranteed encrypted communications, and allow use of simple access tokens.
+
+> TODO: more
 
 ### 4. Verbs
 
@@ -45,7 +49,7 @@ The API must be served over SSL, using `https`. It must not redirect on non-SSL 
 
 The HTTP client that doesn't support PUT, PATCH or DELETE requests must send a POST request with an `X-HTTP-Method-Override` header specifying the desired verb.
 
-The API must correctly handle this header. When it is set, it take precedence over the original request method.
+The server must correctly handle this header. When it is set, it take precedence over the original request method.
 
 ### Status codes
 
@@ -53,7 +57,7 @@ The API must correctly handle this header. When it is set, it take precedence ov
 
 Codes in the 2xx range must indicate a success, codes in the 4xx range must indicate an error that failed given the information provided (e.g., a required parameter was omitted, a charge failed, etc.), and codes in the 5xx range must indicate a server-side error (e.g., the server is unavailable).
 
-The API must use the following status codes:
+The server must respond with the following status codes, according to the situation:
 
 |          Http Code        |                               Meaning                                     |
 |---------------------------|---------------------------------------------------------------------------|
@@ -237,6 +241,36 @@ X-Total: 4
 
 ### Filtering
 
+The client should be able to filter resource collections using the `filter` parameter. In this case, only the fields matching the given filter(s) will be returned.
+
+The value of the `filter` parameter must be a hash of the filter name as a key, and a comma-separated list of the requested values as a value.
+
+```HTTP
+GET /unicorns?filter[color]=yellow HTTP/1.1
+Content-Type: application/json
+Host: api.example.org
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "color": "yellow",
+    "country": {
+      "name": "Australia"
+    }
+  },
+  {
+    "id": 3,
+    "color": "yellow",
+    "country": {
+      "name": "U.S.A"
+    }
+  }
+]
+```
+
 
 ### Sorting
 
@@ -353,9 +387,15 @@ If the server does not support selection as specified in the query parameter `fi
 
 ### Enveloping
 
+> TODO
 
 ### Caching
 
+> TODO
+
+### Asynchronous processing
+
+> TODO
 
 ### Sources
 
