@@ -9,21 +9,44 @@ A 21th century specification proposal for Rest API's
 
 #### This specification is intended to establish an agreement on the behavior of an API, no matters the format (json, xml, etc...).
 
+
+- 1. Design
+- 2. Formatting
+- 3. Security
+- 4. Verbs
+  - Fallback header
+  - Location header
+  - Resource on update and create actions
+- 5. Status codes
+- 6. Errors
+- 7. Parameters
+- 8. Custom HTTP headers
+- 9. Versioning
+- 10. Pagination
+- 11. Filtering
+- 12. Sorting
+- 13. Searching
+- 14. Embedding
+- 15. Selecting
+- 16. Caching
+- 17. Asynchronous processing
+- Sources
+
 ### 1. Design
 
 The API must embrace RESTful design principles. It must be resource-based, and each resource representation must contain enough information to modify or delete the resource on the server, provided it has permission to do so.
 
 - The resources names and fields must be [snake_case](http://en.wikipedia.org/wiki/Snake_case).
 
-> [snake_case is 20% easier to read than camelCase](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=5521745). That impact on readability would affect API explorability and examples in documentation. 
+  > [snake_case is 20% easier to read than camelCase](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=5521745). That impact on readability would affect API explorability and examples in documentation. 
 
 - The resources names must be nouns.
 
-> [Nouns are good, verbs are bad](http://apigee.com/about/blog/technology/restful-api-design-nouns-are-good-verbs-are-bad)
+  > [Nouns are good, verbs are bad](http://apigee.com/about/blog/technology/restful-api-design-nouns-are-good-verbs-are-bad)
 
 - The endpoints names must be plural.
 
-> You don't want to deal with complex pluralization (e.g., foot/feet, child/children, people/people). Keep it simple.
+  > You don't want to deal with complex pluralization (e.g., foot/feet, child/children, people/people). Keep it simple.
 
 ### 2. Formatting
 
@@ -34,11 +57,9 @@ The API must embrace RESTful design principles. It must be resource-based, and e
 
 ### 3. Security
 
-The API must be served over SSL, using `https`. It must not redirect on non-SSL urls.
+- The API must be served over SSL, using `https`. It must not redirect on non-SSL urls.
 
-> Always using SSL guaranteed encrypted communications, and allow use of simple access tokens.
-
-> TODO: more
+  > Always using SSL guaranteed encrypted communications, and allow use of simple access tokens.
 
 ### 4. Verbs
 
@@ -63,7 +84,7 @@ When a resource is created (with a `POST` request), the response must contain a 
 
 When a resource is created or modified (e.g., with a POST, PUT or PATCH request), the response must contain the created or updated respresentation of the resource.
 
-### Status codes
+### 5. Status codes
 
 **The API must uses descriptive HTTP response codes to indicate the success or failure of request.**
 
@@ -92,7 +113,7 @@ The server must respond with the following status codes, according to the situat
 | 503 Service Unavailable   | The server is currently unable to handle the request.                     |
 
 
-### Errors
+### 6. Errors
 
 - All errors in the 4xx must return a body containing a `error` key, containing the error code.
 
@@ -133,7 +154,7 @@ Content-Type: application/json
 ```
 
 
-### Parameters
+### 7. Parameters
 
 Resource creation or update parameters must be wrapped in an object as the singular name of the resource.
 
@@ -165,19 +186,22 @@ Content-Type: application/json
 ```
 
 
-### Custom HTTP headers
+### 8. Custom HTTP headers
 
 All non-standard HTTP headers must begin by a `X-`.
 
 For example, for rate limiting, the `X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining` and `X-Rate-Limit-Reset` headers should be used.
 
-### Versioning
+### 9. Versioning
 
 The API must be versioned, and must not have breaking changes whitout version change.
 
 - The client must be able to set the requested version trough the `Accept` header. (e.g., `Accept: application/vnd.myapp.v2+json`).
+
 - Without `Accept` header, the API must use the last stable version.
+
 - The response header must contain a `X-Version` field containing the version used for this request.
+
 - The version field should be formated using the [semantic versioning](http://semver.org/).
 
 ```HTTP
@@ -197,7 +221,7 @@ X-Version: 3.1
 }
 ```
 
-### Pagination
+### 10. Pagination
 
 Requests for collections should be paginated, and return a limited number of results.
 
@@ -242,7 +266,7 @@ X-Total: 4
 ]
 ```
 
-### Filtering
+### 11. Filtering
 
 The client should be able to filter resource collections using the `filter` parameter. In this case, only the fields matching the given filter(s) will be returned.
 
@@ -269,7 +293,7 @@ Content-Type: application/json
 ```
 
 
-### Sorting
+### 12. Sorting
 
 The client should be able to sort resource collections according to one or more fields using the `sort` parameter. The value for `sort` must represent sort fields.
 
@@ -315,9 +339,9 @@ Content-Type: application/json
 
 If the server does not support sorting as specified in the query parameter `sort`, it must return a `400 Bad Request` status code.
 
-### Searching
+### 13. Searching
 
-The client should be able to search on resource collections using the `search` parameter. In this case, only the fields matching the given search(s) will be returned.
+The client should be able to search on resource collections fields using the `search` parameter. In this case, only the fields matching the given search(s) will be returned.
 
 The value of the `search` parameter must be a hash of the search field as a key, and the query as a value.
 
@@ -351,8 +375,9 @@ Content-Type: application/json
 ]
 ```
 
+A global search on a resource collection should be implemented using directly a value instead of a hash for the `search` parameter.
 
-### Embedding
+### 14. Embedding
 
 The client should be able to include data related to (or referenced) from the resource being requested using the `embed` parameter. The value of the `embed` parameter must be a comma separated list of fields to be embedded. Dot-notation must be used to refer to sub-fields.
 
@@ -404,7 +429,7 @@ Content-Type: application/json
 ]
 ```
 
-### Selecting
+### 15. Selecting
 
 The client should be able to select only specific fields in the response using the `fields` parameter. In this case, only the requested fields will be returned.
 
@@ -441,11 +466,11 @@ Content-Type: application/json
 If the server does not support selection as specified in the query parameter `fields`, it must return a `400 Bad Request` status code.
 
 
-### Caching
+### 16. Caching
 
 Server should generate a [ETag header](http://en.wikipedia.org/wiki/HTTP_ETag) containing a hash or checksum of the representation. This value should change whenever the output representation changes.
 
-### Asynchronous processing
+### 17. Asynchronous processing
 
 When a resource creation or update is asynchronously processed, the request should return a `202 Accepted` status code with a link in the `Content-Location` header which should redirect to the resource when the job processing is done.
 
