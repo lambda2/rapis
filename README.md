@@ -28,6 +28,7 @@ A 21th century specification proposal for Rest API's
 15. [Selecting](#15-selecting)
 16. [Caching](#16-caching)
 17. [Asynchronous processing](#17-asynchronous-processing)
+
 [Sources](#sources)
 
 ## 1. Design
