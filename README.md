@@ -1,12 +1,10 @@
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/lambda2/rapis/master/logo.svg" alt="RAPIS">
+  <img src="https://raw.githubusercontent.com/lambda2/rapis/master/logo.png" alt="RAPIS" width="250">
   <br>
   A REST API Standard
   <br>
 </h1>
-
----------------
 
 <p align="center">A 21th century specification proposal for Rest API's</p>
 
