@@ -29,7 +29,7 @@
      inkscape:cx="41.176245"
      inkscape:cy="62.174584"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="flowRoot4166"
      showgrid="false"
      inkscape:window-width="1863"
      inkscape:window-height="1155"
@@ -64,20 +64,30 @@
        inkscape:connector-curvature="0"
        style="fill:#4d4d4d"
        sodipodi:nodetypes="ccccccccccccccccccccsscccccccccccccccccccsccccccssscccccccccccccccccsccccscscccccccccccsccscsccc" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot4166"
+    <g
+       transform="translate(104.65613,16.220202)"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:40px;line-height:125%;font-family:'.Lucida Grande UI';-inkscape-font-specification:'.Lucida Grande UI Medium';letter-spacing:0px;word-spacing:0px;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(104.65613,16.220202)"><flowRegion
-         id="flowRegion4168"><rect
-           id="rect4170"
-           width="174.45345"
-           height="133.73039"
-           x="225.35727"
-           y="436.51221"
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:'.Lucida Grande UI';-inkscape-font-specification:'.Lucida Grande UI Medium';fill:#4d4d4d" /></flowRegion><flowPara
-         id="flowPara4172"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:30px;font-family:Futura;-inkscape-font-specification:'Futura Medium';fill:#4d4d4d">R<flowSpan
-   style="fill:#666666"
-   id="flowSpan4193">API</flowSpan>S</flowPara></flowRoot>  </g>
+       id="flowRoot4166">
+      <path
+         d="m 235.72852,456.1975 7.00195,9.63867 -4.17481,0 -6.45996,-9.25782 -0.61523,0 0,9.25782 -3.41309,0 0,-22.61719 3.99903,0 q 4.48242,0 6.47461,1.68457 2.19726,1.875 2.19726,4.95117 0,2.40235 -1.37695,4.13086 -1.37696,1.72852 -3.63281,2.21192 z m -4.24805,-2.59278 1.08398,0 q 4.84864,0 4.84864,-3.70605 0,-3.47168 -4.7168,-3.47168 l -1.21582,0 0,7.17773 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:30px;font-family:Futura;-inkscape-font-specification:'Futura Medium';fill:#4d4d4d"
+         id="path4215" />
+      <path
+         d="m 259.40039,460.343 -9.68262,0 -2.51953,5.49317 -3.67676,0 11.19141,-24.03809 10.7959,24.03809 -3.73535,0 -2.37305,-5.49317 z m -1.3916,-3.208 -3.35449,-7.69043 -3.51563,7.69043 6.87012,0 z"
+         style="fill:#666666"
+         id="path4217" />
+      <path
+         d="m 271.73437,456.6516 0,9.18457 -3.41308,0 0,-22.61719 3.86719,0 q 2.84179,0 4.29199,0.39551 1.46484,0.39551 2.57812,1.49414 1.94825,1.9043 1.94825,4.80469 0,3.10546 -2.08008,4.92187 -2.08008,1.81641 -5.61035,1.81641 l -1.58204,0 z m 0,-3.16407 1.27442,0 q 4.70215,0 4.70215,-3.61816 0,-3.50098 -4.84864,-3.50098 l -1.12793,0 0,7.11914 z"
+         style="fill:#666666"
+         id="path4219" />
+      <path
+         d="m 287.90625,443.21898 0,22.61719 -3.41309,0 0,-22.61719 3.41309,0 z"
+         style="fill:#666666"
+         id="path4221" />
+      <path
+         d="m 306.12891,446.58812 -2.76856,1.64063 q -0.77637,-1.34766 -1.47949,-1.75782 -0.73242,-0.46875 -1.88965,-0.46875 -1.4209,0 -2.3584,0.80567 -0.9375,0.79101 -0.9375,1.99218 0,1.65528 2.46094,2.66602 l 2.25586,0.92285 q 2.75391,1.11328 4.02832,2.72461 1.27441,1.59668 1.27441,3.92578 0,3.12012 -2.08007,5.15625 -2.09473,2.05078 -5.2002,2.05078 -2.94434,0 -4.86328,-1.74316 -1.88965,-1.74316 -2.3584,-4.90723 l 3.45703,-0.76172 q 0.23438,1.99219 0.82031,2.75391 1.05469,1.46484 3.07618,1.46484 1.59668,0 2.65136,-1.06933 1.05469,-1.06934 1.05469,-2.70996 0,-0.65918 -0.19043,-1.20117 -0.17578,-0.55665 -0.57129,-1.01075 -0.38086,-0.46875 -0.99609,-0.86425 -0.61524,-0.41016 -1.46485,-0.77637 l -2.18261,-0.9082 q -4.64356,-1.9629 -4.64356,-5.74219 0,-2.54883 1.94824,-4.2627 1.94825,-1.72851 4.84864,-1.72851 3.91113,0 6.1084,3.80859 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:30px;font-family:Futura;-inkscape-font-specification:'Futura Medium';fill:#4d4d4d"
+         id="path4223" />
+    </g>
+  </g>
 </svg>
