@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/lambda2/rapis/master/logo.png" alt="RAPIS" width="250">
+  <img src="https://raw.githubusercontent.com/lambda2/rapis/master/images/logo.png" alt="RAPIS" width="250">
   <br>
   A REST API Standard
   <br>
@@ -8,31 +8,37 @@
 
 <p align="center">A 21th century specification proposal for Rest API's</p>
 
-> This specification is intended to establish an agreement on the behavior of an API, no matters the format (json, xml, etc...).
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/lambda2/rapis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+> This specification is intended to establish an agreement on the behavior of an API, no matters the format (json, xml, etc...). [All contributions are welcome](#2-please-contribute)
 
 ## Table of contents
 
-1. [Design](#1-design)
-2. [Formatting](#2-formatting)
-3. [Security](#3-security)
-4. [Verbs](#4-verbs)
-5. [Status codes](#5-status-codes)
-6. [Errors](#6-errors)
-7. [Parameters](#7-parameters)
-8. [Custom HTTP headers](#8-custom-http-headers)
-9. [Versioning](#9-versioning)
-10. [Pagination](#10-pagination)
-11. [Filtering](#11-filtering)
-12. [Sorting](#12-sorting)
-13. [Searching](#13-searching)
-14. [Embedding](#14-embedding)
-15. [Selecting](#15-selecting)
-16. [Caching](#16-caching)
-17. [Asynchronous processing](#17-asynchronous-processing)
+  1. [Specification](#1-specification)
+    1.1 [Design](#1-1-design)
+    1.2 [Formatting](#1-2-formatting)
+    1.3 [Security](#1-3-security)
+    1.4 [Verbs](#1-4-verbs)
+    1.5 [Status codes](#1-5-status-codes)
+    1.6 [Errors](#1-6-errors)
+    1.7 [Parameters](#1-7-parameters)
+    1.8 [Custom HTTP headers](#1-8-custom-http-headers)
+    1.9 [Versioning](#1-9-versioning)
+    1.10 [Pagination](#1-10-pagination)
+    1.11 [Filtering](#1-11-filtering)
+    1.12 [Sorting](#1-12-sorting)
+    1.13 [Searching](#1-13-searching)
+    1.14 [Embedding](#1-14-embedding)
+    1.15 [Selecting](#1-15-selecting)
+    1.16 [Caching](#1-16-caching)
+    1.17 [Asynchronous processing](#1-17-asynchronous-processing)
+  2. [Please contribute](#2-please-contribute)
+  3. [Sources and thanks](#3-sources-and-thanks)
+  4. [License](#4-license)
 
-[Sources](#sources)
+## 1. Specification
 
-## 1. Design
+### 1.1 Design
 
 The API must embrace RESTful design principles. It must be resource-based, and each resource representation must contain enough information to modify or delete the resource on the server, provided it has permission to do so.
 
@@ -48,19 +54,19 @@ The API must embrace RESTful design principles. It must be resource-based, and e
 
   > You don't want to deal with complex pluralization (e.g., foot/feet, child/children, people/people). Keep it simple.
 
-## 2. Formatting
+### 1.2 Formatting
 
 - Dates must be returned in ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ).
 
 - Geographic coordinates must be returned in `[-]d.d, [-]d.d` format (e.g., 12.3456, -98.7654).
 
-## 3. Security
+### 1.3 Security
 
 - The API must be served over SSL, using `https`. It must not redirect on non-SSL urls.
 
   > Always using SSL guaranteed encrypted communications, and allow use of simple access tokens.
 
-## 4. Verbs
+### 1.4 Verbs
 
 |       Verb   |                     Description                       |
 |--------------|-------------------------------------------------------|
@@ -69,21 +75,21 @@ The API must embrace RESTful design principles. It must be resource-based, and e
 |  PATCH / PUT | Used for updating resources.                          |
 |  DELETE      | Used for deleting resources.                          |
 
-### Fallback header
+#### 1.Fallbackheader
 
 The HTTP client that doesn't support PUT, PATCH or DELETE requests must send a POST request with an `X-HTTP-Method-Override` header specifying the desired verb.
 
 The server must correctly handle this header. When it is set, it take precedence over the original request method.
 
-### Location header
+#### 1.Locationheader
 
 When a resource is created (with a `POST` request), the response must contain a `Location` header with the link of the new resource.
 
-### Resource on update and create actions
+#### 1.Resourceon update and create actions
 
 When a resource is created or modified (e.g., with a POST, PUT or PATCH request), the response must contain the created or updated representation of the resource.
 
-## 5. Status codes
+### 1.5 Status codes
 
 **The API must uses descriptive HTTP response codes to indicate the success or failure of request.**
 
@@ -112,7 +118,7 @@ The server must respond with the following status codes, according to the situat
 | 503 Service Unavailable   | The server is currently unable to handle the request.                     |
 
 
-## 6. Errors
+### 1.6 Errors
 
 - All errors in the 4xx must return a body containing a `error` key, containing the error code.
 
@@ -153,7 +159,7 @@ Content-Type: application/json
 ```
 
 
-## 7. Parameters
+### 1.7 Parameters
 
 Resource creation or update parameters must be wrapped in an object as the singular name of the resource.
 
@@ -185,13 +191,13 @@ Content-Type: application/json
 ```
 
 
-## 8. Custom HTTP headers
+### 1.8 Custom HTTP headers
 
 All non-standard HTTP headers must begin by a `X-`.
 
 For example, for rate limiting, the `X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining` and `X-Rate-Limit-Reset` headers should be used.
 
-## 9. Versioning
+### 1.9 Versioning
 
 The API must be versioned, and must not have breaking changes without version change.
 
@@ -220,7 +226,7 @@ X-Version: 3.1
 }
 ```
 
-## 10. Pagination
+### 1.10 Pagination
 
 Requests for collections should be paginated, and return a limited number of results.
 
@@ -265,7 +271,7 @@ X-Total: 4
 ]
 ```
 
-## 11. Filtering
+### 1.11 Filtering
 
 The client should be able to filter resource collections using the `filter` parameter. In this case, only the fields matching the given filter(s) will be returned.
 
@@ -292,7 +298,7 @@ Content-Type: application/json
 ```
 
 
-## 12. Sorting
+### 1.12 Sorting
 
 The client should be able to sort resource collections according to one or more fields using the `sort` parameter. The value for `sort` must represent sort fields.
 
@@ -338,7 +344,7 @@ Content-Type: application/json
 
 If the server does not support sorting as specified in the query parameter `sort`, it must return a `400 Bad Request` status code.
 
-## 13. Searching
+### 1.13 Searching
 
 The client should be able to search on resource collections fields using the `search` parameter. In this case, only the fields matching the given search(s) will be returned.
 
@@ -376,7 +382,7 @@ Content-Type: application/json
 
 A global search on a resource collection should be implemented using directly a value instead of a hash for the `search` parameter.
 
-## 14. Embedding
+### 1.14 Embedding
 
 The client should be able to include data related to (or referenced) from the resource being requested using the `embed` parameter. The value of the `embed` parameter must be a comma separated list of fields to be embedded. Dot-notation must be used to refer to sub-fields.
 
@@ -428,7 +434,7 @@ Content-Type: application/json
 ]
 ```
 
-## 15. Selecting
+### 1.15 Selecting
 
 The client should be able to select only specific fields in the response using the `fields` parameter. In this case, only the requested fields will be returned.
 
@@ -465,11 +471,11 @@ Content-Type: application/json
 If the server does not support selection as specified in the query parameter `fields`, it must return a `400 Bad Request` status code.
 
 
-## 16. Caching
+### 1.16 Caching
 
 Server should generate a [ETag header](http://en.wikipedia.org/wiki/HTTP_ETag) containing a hash or checksum of the representation. This value should change whenever the output representation changes.
 
-## 17. Asynchronous processing
+### 1.17 Asynchronous processing
 
 When a resource creation or update is asynchronously processed, the request should return a `202 Accepted` status code with a link in the `Content-Location` header which should redirect to the resource when the job processing is done.
 
@@ -505,10 +511,25 @@ Content-Type: application/json
 Location: https://api.example.com/movies/3
 ```
 
-## Sources
+## 2. Please contribute
+
+All suggestions, questions and ideas are welcome ! You can reach me on [gitter](https://gitter.im/lambda2/rapis), or fork this project and make a Pull request !
+
+## 3. Sources and thanks
 
 - [Nouns are good, verbs are bad](http://apigee.com/about/blog/technology/restful-api-design-nouns-are-good-verbs-are-bad)
 - [Principles of good RESTful API Design](https://codeplanet.io/principles-good-restful-api-design/)
 - [Best Practices for Designing a Pragmatic RESTful API](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#useful-post-responses)
 - [Semver](http://semver.org/)
 - [JSON API specification](http://jsonapi.org/)
+
+## 4. License
+
+The MIT License (MIT)
+Copyright (c) 2016 André Aubin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
