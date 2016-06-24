@@ -1,12 +1,10 @@
 <h1 align="center">
   <br>
-  R.API.S
-  <br>
-  <small align="center">A REST API Standard</small>
-  <br>
+  R.API.S  
 </h1>
+<h2 align="center">A REST API Standard<br></h2>
 
-<h4 align="center">A 21th century specification proposal for Rest API's</h4>
+<h4 align="center"><br>A 21th century specification proposal for Rest API's</h4>
 
 
 ---------------
