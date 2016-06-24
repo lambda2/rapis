@@ -1,8 +1,12 @@
-# R.API.S
+<h1 align="center">
+  <br>
+  R.API.S
+  <br>
+  <small align="center">A REST API Standard</small>
+  <br>
+</h1>
 
-## REST API Standard
-
-A 21th century specification proposal for Rest API's
+<h4 align="center">A 21th century specification proposal for Rest API's</h4>
 
 
 ---------------
