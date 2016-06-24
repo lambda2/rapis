@@ -8,13 +8,14 @@
 
 <p align="center">A 21th century specification proposal for Rest API's</p>
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/lambda2/rapis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Join the chat at https://gitter.im/lambda2/rapis](https://badges.gitter.im/lambda2/rapis.svg)](https://gitter.im/lambda2/rapis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > This specification is intended to establish an agreement on the behavior of an API, no matters the format (json, xml, etc...). [All contributions are welcome](#2-please-contribute)
 
 ## Table of contents
 
   1. [Specification](#1-specification)
+
     1.1 [Design](#1-1-design)
     1.2 [Formatting](#1-2-formatting)
     1.3 [Security](#1-3-security)
@@ -32,6 +33,7 @@
     1.15 [Selecting](#1-15-selecting)
     1.16 [Caching](#1-16-caching)
     1.17 [Asynchronous processing](#1-17-asynchronous-processing)
+
   2. [Please contribute](#2-please-contribute)
   3. [Sources and thanks](#3-sources-and-thanks)
   4. [License](#4-license)
