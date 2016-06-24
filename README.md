@@ -80,7 +80,7 @@ When a resource is created (with a `POST` request), the response must contain a 
 
 ### Resource on update and create actions
 
-When a resource is created or modified (e.g., with a POST, PUT or PATCH request), the response must contain the created or updated respresentation of the resource.
+When a resource is created or modified (e.g., with a POST, PUT or PATCH request), the response must contain the created or updated representation of the resource.
 
 ## 5. Status codes
 
@@ -102,11 +102,11 @@ The server must respond with the following status codes, according to the situat
 | 403 Forbidden             | Authenticated user does not have access                                   |
 | 404 Not Found             | Page or resource not found                                                |
 | 405 Method Not Allowed    | The request HTTP method is not allowed for the authenticated user         |
-| 410 Gone                  | The endpoint is no longer available. Usefull for old API versions         |
+| 410 Gone                  | The endpoint is no longer available. Useful for old API versions         |
 | 415 Unsupported Media Type| POST/PUT/PATCH request occurred without a application/json content type   |
 | 422 Unprocessable Entry   | A request to modify or create a resource failed due to a validation error |
 | 429 Too Many Requests     | Request rejected due to rate limiting                                     |
-| 500 Internal Server Error | An internal server error occured                                          |
+| 500 Internal Server Error | An internal server error occurred                                          |
 | 502 Bad Gateway           | The server was acting as a gateway or proxy and received an invalid response from the upstream server |
 | 503 Service Unavailable   | The server is currently unable to handle the request.                     |
 
@@ -117,7 +117,7 @@ The server must respond with the following status codes, according to the situat
 
 - This code must be human readable, and identical over the same kinds of errors.
 
-- The body should also contain a `message` key, containing a more detailled description of the error. 
+- The body should also contain a `message` key, containing a more detailed description of the error. 
 
 ```HTTP
 GET /unicorns/4 HTTP/1.1
@@ -192,7 +192,7 @@ For example, for rate limiting, the `X-Rate-Limit-Limit`, `X-Rate-Limit-Remainin
 
 ## 9. Versioning
 
-The API must be versioned, and must not have breaking changes whitout version change.
+The API must be versioned, and must not have breaking changes without version change.
 
 - The client must be able to set the requested version trough the `Accept` header. (e.g., `Accept: application/vnd.myapp.v2+json`).
 
@@ -493,7 +493,7 @@ Content-Location: https://api.example.com/movies/jobs/42
 {}
 ```
 
-When the job process is done, the request of the url in the `Content-Location` header should return a `303 See other` status code with the created resource link in `Location` header.
+When the job process is done, requesting the link in the `Content-Location` header should return a `303 See other` status code with the created resource link in `Location` header.
 
 ```HTTP
 GET /movies/jobs/42 HTTP/1.1
