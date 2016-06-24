@@ -1,17 +1,16 @@
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/lambda2/rapis/master/logo.svg?token=AC4974hwzWoL6CJLhk9fE_Xv3tvIp0yTks5XdnqawA%3D%3D" alt="RAPIS">
+  <img src="https://raw.githubusercontent.com/lambda2/rapis/master/logo.svg" alt="RAPIS">
   <br>
   A REST API Standard
   <br>
 </h1>
 
-<h4 align="center"><br>A 21th century specification proposal for Rest API's</h4>
-
-
 ---------------
 
-### This specification is intended to establish an agreement on the behavior of an API, no matters the format (json, xml, etc...).
+<p align="center">A 21th century specification proposal for Rest API's</p>
+
+> This specification is intended to establish an agreement on the behavior of an API, no matters the format (json, xml, etc...).
 
 ## Table of contents
 
