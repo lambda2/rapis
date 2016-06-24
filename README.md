@@ -75,17 +75,17 @@ The API must embrace RESTful design principles. It must be resource-based, and e
 |  PATCH / PUT | Used for updating resources.                          |
 |  DELETE      | Used for deleting resources.                          |
 
-#### 1.Fallbackheader
+#### Fallback header
 
 The HTTP client that doesn't support PUT, PATCH or DELETE requests must send a POST request with an `X-HTTP-Method-Override` header specifying the desired verb.
 
 The server must correctly handle this header. When it is set, it take precedence over the original request method.
 
-#### 1.Locationheader
+#### Location header
 
 When a resource is created (with a `POST` request), the response must contain a `Location` header with the link of the new resource.
 
-#### 1.Resourceon update and create actions
+#### Response on update and create actions
 
 When a resource is created or modified (e.g., with a POST, PUT or PATCH request), the response must contain the created or updated representation of the resource.
 
