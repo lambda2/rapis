@@ -12,6 +12,8 @@
 
 ## Table of contents
 
+[![Join the chat at https://gitter.im/lambda2/rapis](https://badges.gitter.im/lambda2/rapis.svg)](https://gitter.im/lambda2/rapis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 1. [Design](#1-design)
 2. [Formatting](#2-formatting)
 3. [Security](#3-security)
