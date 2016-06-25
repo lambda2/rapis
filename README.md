@@ -10,7 +10,7 @@
 
 [![Join the chat at https://gitter.im/lambda2/rapis](https://badges.gitter.im/lambda2/rapis.svg)](https://gitter.im/lambda2/rapis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> This specification is intended to establish an agreement on the behavior of an API, no matters the format (json, xml, etc...). [All contributions are welcome](#2-please-contribute)
+> This specification is intended to define how to design a REST API, regardless of the language, format (json, xml, etc...) or libraries . [All contributions are welcome](#2-please-contribute).
 
 ## Table of contents
 
@@ -202,6 +202,7 @@ For example, for rate limiting, the `X-Rate-Limit-Limit`, `X-Rate-Limit-Remainin
 The API must be versioned, and must not have breaking changes without version change.
 
 - The client must be able to set the requested version trough the `Accept` header. (e.g., `Accept: application/vnd.myapp.v2+json`).
+  > [This point is very disputed](http://stackoverflow.com/questions/389169/best-practices-for-api-versioning), but we agree on the fact that the URL must describe a resource, and the URL should not contain the versions.
 
 - Without `Accept` header, the API must use the last stable version.
 
@@ -522,6 +523,7 @@ All suggestions, questions and ideas are welcome ! You can reach me on [gitter](
 - [Best Practices for Designing a Pragmatic RESTful API](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#useful-post-responses)
 - [Semver](http://semver.org/)
 - [JSON API specification](http://jsonapi.org/)
+- [Stackoverflow: Best practices for API versioning?](http://stackoverflow.com/questions/389169/best-practices-for-api-versioning)
 
 ## 4. License
 
