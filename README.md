@@ -6,11 +6,11 @@
   <br>
 </h1>
 
-<p align="center">A 21th century specification proposal for Rest API's</p>
+<p align="center">A 21th century way for designing Rest API's</p>
 
 [![Join the chat at https://gitter.im/lambda2/rapis](https://badges.gitter.im/lambda2/rapis.svg)](https://gitter.im/lambda2/rapis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> This specification is intended to define how to design a REST API, regardless of the language, format (json, xml, etc...) or libraries . [All contributions are welcome](#2-please-contribute).
+> This specification is **a possible way** to design a REST API, regardless of the language, format (json, xml, etc...) or used libraries . [If you don't agree on this specifications, there is other ways to structure your REST API !](#5-other-ways-to-structure-your-rest-api). [**All contributions are welcome**, please help me 🙏](#2-please-contribute).
 
 ## Table of contents
 
@@ -32,9 +32,11 @@
     * 1.15 [Selecting](#115-selecting)
     * 1.16 [Caching](#116-caching)
     * 1.17 [Asynchronous processing](#117-asynchronous-processing)
-  2. [Please contribute](#2-please-contribute)
-  3. [Sources and thanks](#3-sources-and-thanks)
-  4. [License](#4-license)
+  2. [TODO](#2-todo)
+  3. [Please contribute](#3-please-contribute)
+  4. [Sources and thanks](#4-sources-and-thanks)
+  5. [Other ways to structure your REST API](#5-other-ways-to-structure-your-rest-api)
+  6. [License](#6-license)
 
 ## 1. Specification
 
@@ -512,11 +514,24 @@ Content-Type: application/json
 Location: https://api.example.com/movies/3
 ```
 
-## 2. Please contribute
+## 2. TODO
+
+There still a lot to do:
+
+- Create a validator.
+- Define rules about JSON structure.
+- Define rules about performance.
+- Speak more about security (SSL) concerns.
+- Create a more structured way for this guides. Maybe general sections like `bsis`, `requests`, `responses` ?
+- Add documentation rules.
+- Add more explanations about technical choices.
+- Translations.
+
+## 3. Please contribute
 
 All suggestions, questions and ideas are welcome ! You can reach me on [gitter](https://gitter.im/lambda2/rapis), or fork this project and make a Pull request !
 
-## 3. Sources and thanks
+## 4. Sources and thanks
 
 - [Nouns are good, verbs are bad](http://apigee.com/about/blog/technology/restful-api-design-nouns-are-good-verbs-are-bad)
 - [Principles of good RESTful API Design](https://codeplanet.io/principles-good-restful-api-design/)
@@ -525,7 +540,17 @@ All suggestions, questions and ideas are welcome ! You can reach me on [gitter](
 - [JSON API specification](http://jsonapi.org/)
 - [Stackoverflow: Best practices for API versioning?](http://stackoverflow.com/questions/389169/best-practices-for-api-versioning)
 
-## 4. License
+## 5. Other ways to structure your REST API
+
+There is many other specifications. This guide is not intended to be **the one**, it's just a good way, from my point of view and experience, to design a REST API.
+
+- [JSON API](http://jsonapi.org/)
+  > Conventions on JSON API to increase productivity, take advantage of generalized tooling, and focus on what matters: your application.
+
+- [HTTP API DESIGN](https://www.gitbook.com/book/geemus/http-api-design/details)
+  > HTTP API design guide extracted from work on the Heroku Platform API.
+
+## 6. License
 
 The MIT License (MIT)
 Copyright (c) 2016 André Aubin
