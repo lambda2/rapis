@@ -528,7 +528,7 @@ There still a lot to do:
 
 ## 3. Please contribute
 
-All suggestions, questions and ideas are welcome ! You can reach me on [gitter](https://gitter.im/lambda2/rapis), or [fork this project](https://github.com/lambda2/rapis/pulls#fork-destination-box) and make a Pull Request !
+All suggestions, questions and ideas are welcome ! You can reach me on [gitter](https://gitter.im/lambda2/rapis), or [fork this project](https://github.com/lambda2/rapis/fork) and make a Pull Request !
 
 ## 4. Sources and thanks
 
