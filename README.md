@@ -36,7 +36,6 @@
   3. [Please contribute](#3-please-contribute)
   4. [Sources and thanks](#4-sources-and-thanks)
   5. [Other ways to structure your REST API](#5-other-ways-to-structure-your-rest-api)
-  6. [License](#6-license)
 
 ## 1. Specification
 
@@ -522,14 +521,14 @@ There still a lot to do:
 - Define rules about JSON structure.
 - Define rules about performance.
 - Speak more about security (SSL) concerns.
-- Create a more structured way for this guides. Maybe general sections like `bsis`, `requests`, `responses` ?
+- Create a more structured way for this guides. Maybe general sections like `basis`, `requests`, `responses` ?
 - Add documentation rules.
 - Add more explanations about technical choices.
 - Translations.
 
 ## 3. Please contribute
 
-All suggestions, questions and ideas are welcome ! You can reach me on [gitter](https://gitter.im/lambda2/rapis), or fork this project and make a Pull request !
+All suggestions, questions and ideas are welcome ! You can reach me on [gitter](https://gitter.im/lambda2/rapis), or [fork this project](https://github.com/lambda2/rapis/pulls#fork-destination-box) and make a Pull Request !
 
 ## 4. Sources and thanks
 
@@ -549,14 +548,3 @@ There is many other specifications. This guide is not intended to be **the one**
 
 - [HTTP API DESIGN](https://www.gitbook.com/book/geemus/http-api-design/details)
   > HTTP API design guide extracted from work on the Heroku Platform API.
-
-## 6. License
-
-The MIT License (MIT)
-Copyright (c) 2016 André Aubin
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
